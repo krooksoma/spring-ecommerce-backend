@@ -2,10 +2,10 @@ package com.angularspringbootecommerce.dao;
 
 import com.angularspringbootecommerce.entities.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.data.domain.Pageable;
 
 //allows cross-origin from browsers running on 4200
 //origin is the protocol + hostname + port

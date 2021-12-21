@@ -2,12 +2,14 @@ package com.angularspringbootecommerce.entities;
 
 
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.Objects;
 
 //Data annotation from project Lombok automatically generates setters and getters
 //behind the scenes
@@ -15,7 +17,10 @@ import java.sql.Date;
 @Table(name = "product")
 //@Setter
 //@Getter
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Product {
 
     @Id
@@ -60,21 +65,16 @@ public class Product {
     // ManyToOne because one product can belong to many categories.
     // It will join column on the category id.
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
+    }
 
     @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", category=" + category +
-                ", sku='" + sku + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", active=" + active +
-                ", unitInStock=" + unitInStock +
-                ", dateCreated=" + dateCreated +
-                ", lastupdated=" + lastupdated +
-                '}';
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
